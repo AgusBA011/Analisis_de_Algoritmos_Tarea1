@@ -1,49 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
-public class Algoritmos : MonoBehaviour
+public class QuickSort : MonoBehaviour
 {
     // Start is called before the first frame update
-    // Start is called before the first frame update
-    int[] arr = { 64, 34, 25, 12, 22, 11, 90 };
+    
+    const int arraysize = 2000;
+    int[] arr = new int [arraysize];
+    int k;
+    Stopwatch sw = new Stopwatch();
+
+    public GameObject punto;
 
     // Start is called before the first frame update
     void Start()
     {
+        System.Random rnd = new System.Random();
+        for (int i = 0; i < arraysize; i++)
+        {
+            k = rnd.Next(500);
+            arr[i] = k;
+
+        }
+
         int len = arr.Length;
+
+        sw.Start();
 
         quickSort(arr, 0, len - 1);
 
-        foreach (int a in arr)
-        {
-            Debug.Log(a);
-        }
+        sw.Stop();
 
-    }
+        /*foreach (int a in arr)
+        {
+            //UnityEngine.Debug.Log(a);
+        }*/
+        UnityEngine.Debug.Log("(QuickSort)Time elapsed:" + sw.Elapsed.ToString("ss\\.fff"));
+       
+        Instantiate(punto);
+        punto.transform.Translate(0f, 0f, 0f);
+}
 
     // Update is called once per frame
     void Update()
     {
 
     }
-
-    //Algoritmo para BubbleSort
-    static void bubbleSort(int[] arr)
-    {
-        int len = arr.Length; int i; int j;
-
-        for (i = 0; i < len - 1; i++)
-            for (j = 0; j < len - i - 1; j++)
-                if (arr[j] > arr[j + 1])
-                {
-                    int temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                }
-    }
-
-
     //Algoritmo para QuickSort
 
     static int particionar(int[] arr, int imin, int imax)
