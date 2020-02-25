@@ -7,7 +7,7 @@ public class BubbleSort : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    const int arraysize = 2000;
+    const int arraysize = 1000;
     int[] arr = new int[arraysize];
     int k;
     Stopwatch sw = new Stopwatch();
@@ -27,11 +27,8 @@ public class BubbleSort : MonoBehaviour
         bubbleSort(arr);
         sw.Stop();
 
-        /*foreach (int a in arr)
-        {
-            //UnityEngine.Debug.Log(a);
-        }*/
-        UnityEngine.Debug.Log("(Bubble Sort)Time elapsed:" + sw.Elapsed.ToString("ss\\.fff"));
+        UnityEngine.Debug.Log("(Bubble Sort)Time elapsed:" + ((double)(sw.Elapsed.TotalMilliseconds * 1000000) /
+            1000000).ToString("0.00 ms"));
 
     }
 

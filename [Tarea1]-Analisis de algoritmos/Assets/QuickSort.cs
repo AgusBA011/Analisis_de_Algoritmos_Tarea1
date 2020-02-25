@@ -6,13 +6,15 @@ using UnityEngine;
 public class QuickSort : MonoBehaviour
 {
     // Start is called before the first frame update
-    
-    const int arraysize = 2000;
-    int[] arr = new int [arraysize];
+
+    const int arraysize = 1000;
+    int[] arr = new int[arraysize];
     int k;
     Stopwatch sw = new Stopwatch();
 
     public GameObject punto;
+    public GameObject tiempo;
+    public TextMesh tm;
 
     // Start is called before the first frame update
     void Start()
@@ -33,15 +35,30 @@ public class QuickSort : MonoBehaviour
 
         sw.Stop();
 
-        /*foreach (int a in arr)
-        {
-            //UnityEngine.Debug.Log(a);
-        }*/
-        UnityEngine.Debug.Log("(QuickSort)Time elapsed:" + sw.Elapsed.ToString("ss\\.fff"));
-       
+        UnityEngine.Debug.Log("(QuickSort)Time elapsed:" + ((double)(sw.Elapsed.TotalMilliseconds * 1000000) /
+            1000000).ToString("0.00 ms"));
+
+        float timeElapsed = sw.Elapsed.Milliseconds;
+
+        UnityEngine.Debug.Log(timeElapsed);
+
+        float bolaY = -3.1f + timeElapsed;
+        float tiempoY = -3.2f + timeElapsed;
+
         Instantiate(punto);
-        punto.transform.Translate(0f, 0f, 0f);
-}
+        punto.transform.position = new Vector3(-0.8f, 2f, bolaY);
+
+        Instantiate(tiempo);
+
+        tiempo.transform.position = new Vector3(-11.12f, 0f, tiempoY);
+        tiempo.transform.eulerAngles = new Vector3(90, 0, 0);
+
+        TextMesh tm = new TextMesh();
+        tm = tiempo.GetComponent("TextMesh") as TextMesh;
+        tm.text = ((double)(sw.Elapsed.TotalMilliseconds * 1000000) /
+            1000000).ToString("0.00 ms") + "---";
+
+    }
 
     // Update is called once per frame
     void Update()
